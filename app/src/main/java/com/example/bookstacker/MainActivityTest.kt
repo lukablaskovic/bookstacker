@@ -47,9 +47,10 @@ class MainActivityTest : AppCompatActivity() {
 
                         // Print each book's title, description and image links
                         for (book in books) {
-                            println("Title: ${book.volumeInfo.title}")
-                            println("Description: ${book.volumeInfo.description}")
-                            println("Thumbnail: ${book.volumeInfo.imageLinks?.thumbnail ?: "No thumbnail available"}")
+                            println(book)
+                            //println("Title: ${book.volumeInfo.title}")
+                            //println("Description: ${book.volumeInfo.description}")
+                            //println("Thumbnail: ${book.volumeInfo.imageLinks?.thumbnail ?: "No thumbnail available"}")
                         }
                     }
                 }
