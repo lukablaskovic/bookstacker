@@ -58,11 +58,14 @@ class FirstFragment : Fragment() {
         )
             .fallbackToDestructiveMigration()
             .build()
-
+        books.clear();
         CoroutineScope(Dispatchers.IO).launch {
             // Now fetch all books from the database
             val storedBooks = db.bookDao().getAllBooks()
             books.addAll(convertBookEntityListToBookCollection(storedBooks));
+            val totalBooksTextView: TextView = view.findViewById(R.id.totalBooks)
+            val totalBooks = books.size
+            totalBooksTextView.text = "$totalBooks"
 
             // Print them out (on the main thread to avoid NetworkOnMainThreadException)
             withContext(Dispatchers.Main) {
@@ -83,11 +86,6 @@ class FirstFragment : Fragment() {
         // Set the adapter on the RecyclerView
         recyclerView.adapter = adapter
 
-        // Update the total books count TextView
-        val totalBooksTextView: TextView = view.findViewById(R.id.totalBooks)
-        val totalBooks = adapter.itemCount
-        totalBooksTextView.text = "$totalBooks"
-
         // Get a reference to the "Add Book" button
         val addBookButton: FloatingActionButton = view.findViewById(R.id.addBook)
 
@@ -100,7 +98,7 @@ class FirstFragment : Fragment() {
         return bookEntityList.map { bookEntity ->
             Book(
                 id = bookEntity.id.toString(),
-                volumeInfo = VolumeInfo( bookEntity.title,  listOf(bookEntity.authors),  bookEntity.publisher,  bookEntity.publishedDate,  bookEntity.description, ImageLinks("",bookEntity.thumbnail))
+                volumeInfo = VolumeInfo( bookEntity.title,  listOf(bookEntity.authors),  bookEntity.publisher,  bookEntity.publishedDate,  bookEntity.description, ImageLinks("",bookEntity.thumbnail), bookEntity.pageCount)
             )
         }
     }

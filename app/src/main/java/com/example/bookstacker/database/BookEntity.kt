@@ -11,5 +11,8 @@ data class BookEntity(
     val publisher: String,
     val publishedDate: String,
     val description: String,
+    val pageRead: Int = 0,
+    val status: String = "UNREAD",
+    val pageCount: Int,
     val thumbnail: String
 )

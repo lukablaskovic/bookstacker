@@ -35,7 +35,7 @@ class MyListOfAddedBooksRecyclerViewAdapter(
         holder.titleView.text = item.volumeInfo.title
         holder.authorView.text = item.volumeInfo.authors.joinToString(", ")
         holder.yearView.text = item.volumeInfo.publishedDate
-        //holder.pagesView.text = item.volumeInfo.
+        holder.pagesView.text = item.volumeInfo.pageCounts.toString()
     }
 
     override fun getItemCount(): Int = values.size

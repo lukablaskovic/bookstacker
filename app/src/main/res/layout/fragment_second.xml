@@ -197,7 +197,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/edittext_rounded_background_line"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:text=""
                 tools:ignore="LabelFor,SpeakableTextPresentCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck,VisualLintTextFieldSize"
                 android:autofillHints="" />

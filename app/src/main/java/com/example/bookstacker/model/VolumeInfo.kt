@@ -6,7 +6,8 @@ data class VolumeInfo(
     val publisher: String,
     val publishedDate: String,
     val description: String,
-    val imageLinks: ImageLinks
+    val imageLinks: ImageLinks,
+    val pageCounts: Int
 )
 
 // Reference https://developers.google.com/books/docs/v1/using

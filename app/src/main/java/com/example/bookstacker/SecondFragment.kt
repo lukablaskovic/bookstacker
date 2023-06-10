@@ -58,6 +58,7 @@ class SecondFragment : Fragment() {
             val authorsEditText: EditText = view.findViewById(R.id.BookAuthorEdit)
             val publisherEditText: EditText = view.findViewById(R.id.BookPublisherEdit)
             val publishedDateEditText: EditText = view.findViewById(R.id.BookDateEdit)
+            val pagesEditText: EditText = view.findViewById(R.id.BookPagesEdit)
             val descriptionEditText: EditText = view.findViewById(R.id.BookDescriptionEdit)
             val thumbnailEditText: EditText = view.findViewById(R.id.BookImageEdit)
 
@@ -65,6 +66,9 @@ class SecondFragment : Fragment() {
             val authors = authorsEditText.text.toString()
             val publisher = publisherEditText.text.toString()
             val publishedDate = publishedDateEditText.text.toString()
+            var pages = pagesEditText.text.toString().toIntOrNull()
+            if (pages == null)
+                pages = 0
             val description = descriptionEditText.text.toString()
             val thumbnail = thumbnailEditText.text.toString()
 
@@ -74,7 +78,10 @@ class SecondFragment : Fragment() {
                 publisher = publisher,
                 publishedDate = publishedDate,
                 description = description,
-                thumbnail = thumbnail
+                thumbnail = thumbnail,
+                status = "UNREAD",
+                pageCount = pages,
+                pageRead = 0
             )
             //This actually saves books to database
             CoroutineScope(Dispatchers.IO).launch {
