@@ -11,5 +11,4 @@
     android:paddingStart="8dp"
     android:paddingEnd="8dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context=".ListOfAddedBooks"
     tools:listitem="@layout/fragment_list_of_added_books" />

@@ -1,21 +1,29 @@
 package com.example.bookstacker
 
+import BookService
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
+import android.widget.*
+import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.example.bookstacker.database.BookDatabase
 import com.example.bookstacker.database.BookEntity
 import com.example.bookstacker.databinding.FragmentSecondBinding
+import com.example.bookstacker.model.Book
+import com.example.bookstacker.model.BookResponse
+import com.example.bookstacker.model.ImageLinks
+import com.example.bookstacker.model.VolumeInfo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -24,6 +32,8 @@ class SecondFragment : Fragment() {
 
     private lateinit var db: BookDatabase
     private var _binding: FragmentSecondBinding? = null
+    val books: MutableList<Book> = mutableListOf()
+    private lateinit var adapter: MyItemGoogleBookRecyclerViewAdapter
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -98,10 +108,85 @@ class SecondFragment : Fragment() {
                 }
             }
         }
+        val searchView: SearchView = view.findViewById(R.id.searchView)
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                // This method is called when the user submits the search query
+                performSearch(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                // This method is called when the search query text changes
+                // You can perform incremental search or filtering here
+                return true
+            }
+        })
+
+        // Set an OnCloseListener to handle the search view close event
+        searchView.setOnCloseListener {
+            // Clear the search results or perform any necessary actions
+            clearSearchResults()
+            false
+        }
+
+        // Set an OnFocusChangeListener to handle the search view focus change event
+        searchView.setOnQueryTextFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                // Clear the search results or perform any necessary actions
+                clearSearchResults()
+            }
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+    private fun clearSearchResults() {
+        val recyclerView: RecyclerView? = view?.findViewById(R.id.list)
+        recyclerView?.visibility = View.GONE
+
+        val inputsLayout: LinearLayout? = view?.findViewById(R.id.inputs)
+        inputsLayout?.visibility = View.VISIBLE
+    }
+
+    private fun performSearch(query: String) {
+
+        val recyclerView: RecyclerView? = view?.findViewById(R.id.list)
+        recyclerView?.visibility = View.VISIBLE
+        val inputsLayout: LinearLayout? = view?.findViewById(R.id.inputs)
+        inputsLayout?.visibility = View.GONE
+
+        val service = ServiceBuilder.buildService(BookService::class.java)
+        val call = service.getBooks(query)
+
+        call.enqueue(object : Callback<BookResponse> {
+            override fun onResponse(
+                call: Call<BookResponse>,
+                response: Response<BookResponse>
+            ) {
+                if (response.isSuccessful) {
+                    books.clear()
+                    response.body()?.let { bookResponse ->
+                        books.addAll(bookResponse.items) // Add the fetched books to your list
+
+                        // Print each book's title, description and image links
+                        for (book in books) {
+                            println(book)
+                        }
+                    }
+                    // Initialize the adapter with the data list
+                    adapter = MyItemGoogleBookRecyclerViewAdapter(books)
+                    // Set the adapter on the RecyclerView
+                    recyclerView?.adapter = adapter
+                }
+            }
+
+            override fun onFailure(call: Call<BookResponse>, t: Throwable) {
+                println("Error happening!")
+            }
+        })
     }
 }

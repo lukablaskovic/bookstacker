@@ -75,8 +75,6 @@ class FirstFragment : Fragment() {
             }
         }
 
-        // Create your data list here or retrieve it from a source
-
         // Initialize the adapter with the data list
         adapter = MyListOfAddedBooksRecyclerViewAdapter(books)
 
@@ -85,9 +83,6 @@ class FirstFragment : Fragment() {
 
         // Set the adapter on the RecyclerView
         recyclerView.adapter = adapter
-
-        // Get a reference to the "Add Book" button
-        val addBookButton: FloatingActionButton = view.findViewById(R.id.addBook)
 
         binding.addBook.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
