@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.example.bookstacker.database.BookDatabase
 import com.example.bookstacker.database.BookEntity
+import com.example.bookstacker.database.BookEntity.Companion.sortByTitleAZ
+import com.example.bookstacker.database.BookEntity.Companion.sortByTitleZA
 import com.example.bookstacker.databinding.FragmentFirstBinding
 import com.example.bookstacker.model.Book
 import com.example.bookstacker.model.ImageLinks
@@ -22,14 +24,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
 class FirstFragment : Fragment() {
 
     private var _binding: FragmentFirstBinding? = null
     private lateinit var db: BookDatabase
     val books: MutableList<Book> = mutableListOf()
+    var storedBooks:  List<BookEntity> = mutableListOf()
+    var sortedByTitleAZ:  List<BookEntity> = mutableListOf()
+    var sortedByTitleZA:  List<BookEntity> = mutableListOf()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -60,7 +62,16 @@ class FirstFragment : Fragment() {
         books.clear();
         CoroutineScope(Dispatchers.IO).launch {
             // Now fetch all books from the database
-            val storedBooks = db.bookDao().getAllBooks()
+            storedBooks = db.bookDao().getAllBooks()
+
+            sortedByTitleAZ = storedBooks.sortByTitleAZ()
+            sortedByTitleZA = storedBooks.sortByTitleZA()
+
+            // Get a reference to the RecyclerView
+            val recyclerView: RecyclerView = view.findViewById(R.id.list)
+            adapter = MyListOfAddedBooksRecyclerViewAdapter(storedBooks.toMutableList())        // Set the adapter on the RecyclerView
+            recyclerView.adapter = adapter
+
             books.addAll(convertBookEntityListToBookCollection(storedBooks));
             val totalBooksTextView: TextView = view.findViewById(R.id.totalBooks)
             val totalBooks = books.size
@@ -74,17 +85,18 @@ class FirstFragment : Fragment() {
             }
         }
 
-        // Initialize the adapter with the data list
-        adapter = MyListOfAddedBooksRecyclerViewAdapter(books)
-
-        // Get a reference to the RecyclerView
-        val recyclerView: RecyclerView = view.findViewById(R.id.list)
-
-        // Set the adapter on the RecyclerView
-        recyclerView.adapter = adapter
-
         binding.addBook.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        }
+        binding.sortAZ.setOnClickListener {
+            val recyclerView: RecyclerView = view.findViewById(R.id.list)
+            adapter = MyListOfAddedBooksRecyclerViewAdapter(sortedByTitleAZ.toMutableList())        // Set the adapter on the RecyclerView
+            recyclerView.adapter = adapter
+        }
+        binding.sortZA.setOnClickListener {
+            val recyclerView: RecyclerView = view.findViewById(R.id.list)
+            adapter = MyListOfAddedBooksRecyclerViewAdapter(sortedByTitleZA.toMutableList())        // Set the adapter on the RecyclerView
+            recyclerView.adapter = adapter
         }
     }
 

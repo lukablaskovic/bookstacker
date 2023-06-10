@@ -13,7 +13,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            tools:ignore="UselessParent">
 
             <ImageView
                 android:id="@+id/bookCover"
@@ -92,6 +93,7 @@
     </RelativeLayout>
 
     <ImageView
+        android:id="@+id/bookmark_yellow"
         android:layout_width="64dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -100,7 +102,34 @@
         android:layout_marginBottom="-4dp"
         android:contentDescription="@string/bookmark_description"
         android:translationZ="8dp"
+        android:visibility="invisible"
         app:srcCompat="@drawable/bookmark_yellow"
-        tools:ignore="NestedWeights,ImageContrastCheck" />
+        tools:ignore="NestedWeights,ImageContrastCheck,VisualLintBounds" />
+    <ImageView
+        android:id="@+id/bookmark_red"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="-4dp"
+        android:contentDescription="@string/bookmark_description"
+        android:translationZ="8dp"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/bookmark_red"
+        tools:ignore="NestedWeights,ImageContrastCheck,VisualLintBounds" />
+    <ImageView
+        android:id="@+id/bookmark_green"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="4dp"
+        android:visibility="invisible"
+        android:layout_marginBottom="-4dp"
+        android:contentDescription="@string/bookmark_description"
+        android:translationZ="8dp"
+        app:srcCompat="@drawable/bookmark_green"
+        tools:ignore="NestedWeights,ImageContrastCheck,VisualLintBounds" />
 
 </RelativeLayout>

@@ -18,5 +18,14 @@ data class BookEntity(
     val ISBN: String,
     val mainCategory: String,
     val categories: String,
-    val infoLink: String
-)
+    val infoLink: String,
+) {
+    companion object {
+        // Sort by title
+        fun List<BookEntity>.sortByTitleAZ(): List<BookEntity> =
+            sortedBy { it.title }
+        fun List<BookEntity>.sortByTitleZA(): List<BookEntity> =
+            sortedByDescending  { it.title }
+
+    }
+}

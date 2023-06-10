@@ -17,8 +17,6 @@ import com.example.bookstacker.database.BookEntity
 import com.example.bookstacker.databinding.FragmentSecondBinding
 import com.example.bookstacker.model.Book
 import com.example.bookstacker.model.BookResponse
-import com.example.bookstacker.model.ImageLinks
-import com.example.bookstacker.model.VolumeInfo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -36,7 +34,6 @@ class SecondFragment : Fragment(), MyItemGoogleBookRecyclerViewAdapter.OnAddButt
     private var _binding: FragmentSecondBinding? = null
     val books: MutableList<Book> = mutableListOf()
     private lateinit var adapter: MyItemGoogleBookRecyclerViewAdapter
-    private lateinit var onAddButtonClickListener: MyItemGoogleBookRecyclerViewAdapter.OnAddButtonClickListener
 
     // This property is only valid between onCreateView and
     // onDestroyView.
