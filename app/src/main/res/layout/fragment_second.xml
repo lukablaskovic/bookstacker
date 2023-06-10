@@ -26,11 +26,11 @@
                 android:text="Add book Information"
                 android:textColor="#001506"
                 android:textSize="30sp"
-                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -51,14 +51,14 @@
 
             <ImageButton
                 android:id="@+id/imageButton"
-                android:layout_width="132dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
                 android:background="@null"
                 android:scaleType="fitCenter"
                 android:src="@drawable/search"
-                tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck,VisualLintBounds" />
+                tools:ignore="ContentDescription,NestedWeights,SpeakableTextPresentCheck,TouchTargetSizeCheck,VisualLintBounds" />
         </LinearLayout>
 
         <LinearLayout
@@ -72,7 +72,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Title:" />
+                android:text="Title:"
+                android:textColor="@color/darkerGreen"
+                tools:ignore="HardcodedText,NestedWeights" />
 
             <EditText
                 android:id="@+id/BookTitleEdit"
@@ -83,7 +85,8 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:text=""
-                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                tools:ignore="LabelFor,SpeakableTextPresentCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck,VisualLintTextFieldSize"
+                android:autofillHints="" />
         </LinearLayout>
 
         <LinearLayout
@@ -97,7 +100,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Author:" />
+                android:text="Author:"
+                android:textColor="@color/darkerGreen"
+                tools:ignore="HardcodedText,NestedWeights" />
 
             <EditText
                 android:id="@+id/BookAuthorEdit"
@@ -108,7 +113,8 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:text=""
-                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                tools:ignore="LabelFor,SpeakableTextPresentCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck,VisualLintTextFieldSize"
+                android:autofillHints="" />
         </LinearLayout>
 
         <LinearLayout
@@ -122,7 +128,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Published date:" />
+                android:text="Published date:"
+                android:textColor="@color/darkerGreen"
+                tools:ignore="HardcodedText,NestedWeights" />
 
             <EditText
                 android:id="@+id/BookDateEdit"
@@ -135,7 +143,8 @@
                 android:text=""
                 android:textColorHighlight="@color/darkGreen"
                 android:textColorLink="@color/darkGreen"
-                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                tools:ignore="LabelFor,SpeakableTextPresentCheck,SpeakableTextPresentCheck,TextFields,TouchTargetSizeCheck,VisualLintTextFieldSize"
+                android:autofillHints="" />
         </LinearLayout>
 
         <LinearLayout
@@ -149,7 +158,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Publisher:" />
+                android:text="Publisher:"
+                android:textColor="@color/darkerGreen"
+                tools:ignore="HardcodedText,NestedWeights" />
 
             <EditText
                 android:id="@+id/BookPublisherEdit"
@@ -160,7 +171,8 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:text=""
-                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                tools:ignore="LabelFor,SpeakableTextPresentCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck,VisualLintTextFieldSize"
+                android:autofillHints="" />
         </LinearLayout>
 
         <LinearLayout
@@ -174,7 +186,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Pages:" />
+                android:text="Pages:"
+                android:textColor="@color/darkerGreen"
+                tools:ignore="HardcodedText,NestedWeights" />
 
             <EditText
                 android:id="@+id/BookPagesEdit"
@@ -185,7 +199,8 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:text=""
-                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                tools:ignore="LabelFor,SpeakableTextPresentCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck,VisualLintTextFieldSize"
+                android:autofillHints="" />
         </LinearLayout>
 
         <LinearLayout
@@ -199,7 +214,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="ISBN:" />
+                android:text="ISBN:"
+                android:textColor="@color/darkerGreen"
+                tools:ignore="HardcodedText,NestedWeights" />
 
             <EditText
                 android:id="@+id/BookISBNEdit"
@@ -210,7 +227,8 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:text=""
-                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                tools:ignore="LabelFor,SpeakableTextPresentCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck,VisualLintTextFieldSize"
+                android:autofillHints="" />
         </LinearLayout>
 
         <LinearLayout
@@ -224,7 +242,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Description:" />
+                android:text="Description:"
+                android:textColor="@color/darkerGreen"
+                tools:ignore="HardcodedText,NestedWeights" />
 
             <EditText
                 android:id="@+id/BookDescriptionEdit"
@@ -236,24 +256,61 @@
                 android:ems="10"
                 android:gravity="start|top"
                 android:inputType="textMultiLine"
-                tools:ignore="SpeakableTextPresentCheck"
-                android:padding="8dp"/>
+                tools:ignore="LabelFor,SpeakableTextPresentCheck,VisualLintTextFieldSize"
+                android:padding="8dp"
+                android:autofillHints="" />
 
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Image URL:"
+                android:textColor="@color/darkerGreen"
+                tools:ignore="HardcodedText,NestedWeights" />
+
+            <EditText
+                android:id="@+id/BookImageEdit"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:autofillHints=""
+                android:background="@drawable/edittext_rounded_background_line"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text=""
+                tools:ignore="LabelFor,SpeakableTextPresentCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck,VisualLintTextFieldSize" />
+        </LinearLayout>
+
         <Button
+            android:id="@+id/addNewBookButton"
+            style="@style/MyButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:background="@drawable/button_submit_book_bg"
+            android:paddingTop="2dp"
+            android:paddingBottom="0dp"
             android:shadowColor="@color/darkGreen"
-            android:text="Button"
+            android:text="ADD"
+            android:textColor="#C1DCCC"
             android:textColorHighlight="@color/darkGreen"
             android:textColorLink="@color/darkGreen"
+            android:textSize="34sp"
+            app:iconPadding="0dp"
             app:rippleColor="@color/darkGreen"
-            app:strokeColor="@color/darkGreen" />
+            app:strokeColor="@color/darkGreen"
+            tools:ignore="HardcodedText,VisualLintButtonSize" />
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

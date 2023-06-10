@@ -9,6 +9,8 @@ import androidx.room.Query
 interface BookDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(books: List<BookEntity>)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(book: BookEntity )
 
     @Query("SELECT * FROM bookentity")
     suspend fun getAllBooks(): List<BookEntity>

@@ -5,11 +5,11 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class BookEntity(
-    @PrimaryKey val id: String,
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val title: String,
-    val authors: String,  // convert the list to string before storing
+    val authors: String,
     val publisher: String,
     val publishedDate: String,
     val description: String,
-    val thumbnail: String  // just storing the thumbnail url
+    val thumbnail: String
 )

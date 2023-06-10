@@ -30,7 +30,7 @@ class MainActivityTest : AppCompatActivity() {
 
         db = Room.databaseBuilder(
             applicationContext,
-            BookDatabase::class.java, "book-database"
+            BookDatabase::class.java, "fetched_books"
         ).build()
 
         val service = ServiceBuilder.buildService(BookService::class.java)
@@ -43,31 +43,13 @@ class MainActivityTest : AppCompatActivity() {
             ) {
                 if (response.isSuccessful) {
                     response.body()?.let { bookResponse ->
-                        // Map the response items to BookEntity and save them to the database
-                        val bookEntities = bookResponse.items.map { book ->
-                            BookEntity(
-                                id = book.id,
-                                title = book.volumeInfo.title ?: "No title",
-                                authors = book.volumeInfo.authors.joinToString(),
-                                publisher = book.volumeInfo.publisher ?: "No publisher",
-                                publishedDate = book.volumeInfo.publishedDate ?: "No published date",
-                                description = book.volumeInfo.description ?: "No description",
-                                thumbnail = book.volumeInfo.imageLinks?.thumbnail ?: ""
-                            )
-                        }
-                        //This actually saves books to database
-                        CoroutineScope(Dispatchers.IO).launch {
-                            db.bookDao().insertAll(bookEntities)
+                        books.addAll(bookResponse.items) // Add the fetched books to your list
 
-                            // Now fetch all books from the database
-                            val storedBooks = db.bookDao().getAllBooks()
-
-                            // Print them out (on the main thread to avoid NetworkOnMainThreadException)
-                            withContext(Dispatchers.Main) {
-                                storedBooks.forEach { book ->
-                                    Log.d("MainActivity", book.toString())
-                                }
-                            }
+                        // Print each book's title, description and image links
+                        for (book in books) {
+                            println("Title: ${book.volumeInfo.title}")
+                            println("Description: ${book.volumeInfo.description}")
+                            println("Thumbnail: ${book.volumeInfo.imageLinks?.thumbnail ?: "No thumbnail available"}")
                         }
                     }
                 }

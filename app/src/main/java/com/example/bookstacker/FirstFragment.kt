@@ -1,6 +1,7 @@
 package com.example.bookstacker
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +9,19 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
+import com.example.bookstacker.database.BookDatabase
+import com.example.bookstacker.database.BookEntity
 import com.example.bookstacker.databinding.FragmentFirstBinding
+import com.example.bookstacker.model.Book
+import com.example.bookstacker.model.ImageLinks
+import com.example.bookstacker.model.VolumeInfo
 import com.example.bookstacker.placeholder.PlaceholderContent
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -18,6 +29,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 class FirstFragment : Fragment() {
 
     private var _binding: FragmentFirstBinding? = null
+    private lateinit var db: BookDatabase
+    val books: MutableList<Book> = mutableListOf()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -36,13 +49,33 @@ class FirstFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         super.onViewCreated(view, savedInstanceState)
 
+        db = Room.databaseBuilder(
+            requireContext(),
+            BookDatabase::class.java, "book-database"
+        )
+            .fallbackToDestructiveMigration()
+            .build()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            // Now fetch all books from the database
+            val storedBooks = db.bookDao().getAllBooks()
+            books.addAll(convertBookEntityListToBookCollection(storedBooks));
+
+            // Print them out (on the main thread to avoid NetworkOnMainThreadException)
+            withContext(Dispatchers.Main) {
+                storedBooks.forEach { book ->
+                    Log.d("FirstFragment", book.toString())
+                }
+            }
+        }
+
         // Create your data list here or retrieve it from a source
-        val myDataList = PlaceholderContent.ITEMS
 
         // Initialize the adapter with the data list
-        adapter = MyListOfAddedBooksRecyclerViewAdapter(myDataList)
+        adapter = MyListOfAddedBooksRecyclerViewAdapter(books)
 
         // Get a reference to the RecyclerView
         val recyclerView: RecyclerView = view.findViewById(R.id.list)
@@ -60,6 +93,15 @@ class FirstFragment : Fragment() {
 
         binding.addBook.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        }
+    }
+
+    fun convertBookEntityListToBookCollection(bookEntityList: List<BookEntity>): Collection<Book> {
+        return bookEntityList.map { bookEntity ->
+            Book(
+                id = bookEntity.id.toString(),
+                volumeInfo = VolumeInfo( bookEntity.title,  listOf(bookEntity.authors),  bookEntity.publisher,  bookEntity.publishedDate,  bookEntity.description, ImageLinks("",bookEntity.thumbnail))
+            )
         }
     }
 

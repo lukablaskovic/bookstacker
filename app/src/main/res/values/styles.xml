@@ -7,8 +7,7 @@
         <item name="android:layout_weight">1</item>
         <item name="android:background">@drawable/search_view_background</item>
     </style>
-    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/darkGreen</item>
+    <style name="MyButton" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/darkGreen</item>
     </style>
 </resources>
