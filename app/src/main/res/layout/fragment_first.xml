@@ -8,7 +8,7 @@
     tools:context=".FirstFragment">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton3"
+        android:id="@+id/addBook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -48,7 +48,7 @@
                 tools:ignore="HardcodedText" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/totalBooks"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
@@ -88,17 +88,6 @@
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 tools:ignore="ExtraText">
-
-                <!--Button
-                android:id="@+id/button_first"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/next"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-            /-->
-
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/list"

@@ -31,19 +31,23 @@ class MyListOfAddedBooksRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.idView.text = item.id
-        holder.contentView.text = item.content
+        holder.titleView.text = item.title
+        holder.authorView.text = item.author
+        holder.yearView.text = item.year
+        holder.pagesView.text = item.numberOfPages.toString()
     }
 
     override fun getItemCount(): Int = values.size
 
     inner class ViewHolder(binding: FragmentListOfAddedBooksBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        val idView: TextView = binding.year
-        val contentView: TextView = binding.title
+        val titleView: TextView = binding.title
+        val authorView: TextView = binding.author
+        val yearView: TextView = binding.year
+        val pagesView: TextView = binding.pages
 
         override fun toString(): String {
-            return super.toString() + " '" + contentView.text + "'"
+            return super.toString() + " '" + titleView.text + "'"
         }
     }
 
