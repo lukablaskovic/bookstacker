@@ -3,6 +3,7 @@ package com.example.bookstacker
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import coil.load
@@ -13,6 +14,10 @@ import com.example.bookstacker.model.Book
 class MyItemGoogleBookRecyclerViewAdapter(
     private val values: MutableList<Book>
 ) : RecyclerView.Adapter<MyItemGoogleBookRecyclerViewAdapter.ViewHolder>() {
+    interface OnAddButtonClickListener {
+        fun onAddButtonClicked(item: Book)
+    }
+    var onAddButtonClickListener: OnAddButtonClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -37,8 +42,10 @@ class MyItemGoogleBookRecyclerViewAdapter(
         }
         if (item.volumeInfo.imageLinks != null) {
             val imageUrl = item.volumeInfo.imageLinks.thumbnail
-
             holder.bookCoverView.load(imageUrl)
+        }
+        holder.addButtonView.setOnClickListener {
+            onAddButtonClickListener?.onAddButtonClicked(item)
         }
     }
 
@@ -50,6 +57,7 @@ class MyItemGoogleBookRecyclerViewAdapter(
         val authorView: TextView = binding.author
         val yearView: TextView = binding.year
         val bookCoverView: ImageView = binding.bookCover
+        val addButtonView: ImageButton = binding.addNewGoogleBook
         override fun toString(): String {
             return super.toString() + " '" + titleView.text + "'"
         }

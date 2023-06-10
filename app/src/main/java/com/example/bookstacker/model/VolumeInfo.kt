@@ -7,7 +7,11 @@ data class VolumeInfo(
     val publishedDate: String,
     val description: String,
     val imageLinks: ImageLinks,
-    val pageCount: Int
+    val industryIdentifiers: List<IndustryIdentifier>,
+    val pageCount: Int,
+    val mainCategory: String,
+    val categories: List<String>,
+    val infoLink: String
 )
 
 // Reference https://developers.google.com/books/docs/v1/using

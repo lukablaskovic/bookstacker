@@ -2,12 +2,14 @@ package com.example.bookstacker
 
 import BookService
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.example.bookstacker.database.BookDatabase
@@ -28,12 +30,13 @@ import retrofit2.Response
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
-class SecondFragment : Fragment() {
+class SecondFragment : Fragment(), MyItemGoogleBookRecyclerViewAdapter.OnAddButtonClickListener {
 
     private lateinit var db: BookDatabase
     private var _binding: FragmentSecondBinding? = null
     val books: MutableList<Book> = mutableListOf()
     private lateinit var adapter: MyItemGoogleBookRecyclerViewAdapter
+    private lateinit var onAddButtonClickListener: MyItemGoogleBookRecyclerViewAdapter.OnAddButtonClickListener
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -71,6 +74,9 @@ class SecondFragment : Fragment() {
             val pagesEditText: EditText = view.findViewById(R.id.BookPagesEdit)
             val descriptionEditText: EditText = view.findViewById(R.id.BookDescriptionEdit)
             val thumbnailEditText: EditText = view.findViewById(R.id.BookImageEdit)
+            val ISBNEditText: EditText = view.findViewById(R.id.BookISBNEdit)
+            val categoriesEditText: EditText = view.findViewById(R.id.BookCategoriesEdit)
+            val infoURLEditText: EditText = view.findViewById(R.id.BookInfoURLEdit)
 
             val title = titleEditText.text.toString()
             val authors = authorsEditText.text.toString()
@@ -81,6 +87,9 @@ class SecondFragment : Fragment() {
                 pages = 0
             val description = descriptionEditText.text.toString()
             val thumbnail = thumbnailEditText.text.toString()
+            val ISBN = ISBNEditText.text.toString()
+            val categories = categoriesEditText.text.toString()
+            val infoURL = infoURLEditText.text.toString()
 
             val bookEntity = BookEntity(
                 title = title,
@@ -90,8 +99,12 @@ class SecondFragment : Fragment() {
                 description = description,
                 thumbnail = thumbnail,
                 status = "UNREAD",
+                ISBN = ISBN,
                 pageCount = pages,
-                pageRead = 0
+                pageRead = 0,
+                mainCategory = "",
+                categories = categories,
+                infoLink = infoURL,
             )
             //This actually saves books to database
             CoroutineScope(Dispatchers.IO).launch {
@@ -105,6 +118,9 @@ class SecondFragment : Fragment() {
                     storedBooks.forEach { book ->
                         Log.d("SecondFragment", book.toString())
                     }
+
+                    // Navigate to the FirstFragment after the coroutine completes
+                    findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
                 }
             }
         }
@@ -153,7 +169,6 @@ class SecondFragment : Fragment() {
     }
 
     private fun performSearch(query: String) {
-
         val recyclerView: RecyclerView? = view?.findViewById(R.id.list)
         recyclerView?.visibility = View.VISIBLE
         val inputsLayout: LinearLayout? = view?.findViewById(R.id.inputs)
@@ -177,8 +192,10 @@ class SecondFragment : Fragment() {
                             println(book)
                         }
                     }
-                    // Initialize the adapter with the data list
+                    // Create an instance of the adapter
                     adapter = MyItemGoogleBookRecyclerViewAdapter(books)
+                    // Set the click listener
+                    adapter.onAddButtonClickListener = this@SecondFragment
                     // Set the adapter on the RecyclerView
                     recyclerView?.adapter = adapter
                 }
@@ -188,5 +205,34 @@ class SecondFragment : Fragment() {
                 println("Error happening!")
             }
         })
+    }
+
+    override fun onAddButtonClicked(item: Book) {
+        val titleEditText: EditText? = view?.findViewById(R.id.BookTitleEdit)
+        val authorsEditText: EditText? = view?.findViewById(R.id.BookAuthorEdit)
+        val publisherEditText: EditText? = view?.findViewById(R.id.BookPublisherEdit)
+        val publishedDateEditText: EditText? = view?.findViewById(R.id.BookDateEdit)
+        val pagesEditText: EditText? = view?.findViewById(R.id.BookPagesEdit)
+        val descriptionEditText: EditText? = view?.findViewById(R.id.BookDescriptionEdit)
+        val thumbnailEditText: EditText? = view?.findViewById(R.id.BookImageEdit)
+        val iSBNEditText: EditText? = view?.findViewById(R.id.BookISBNEdit)
+        val categoriesEditText: EditText? = view?.findViewById(R.id.BookCategoriesEdit)
+        val infoURLEditText: EditText? = view?.findViewById(R.id.BookInfoURLEdit)
+
+        titleEditText?.text = item.volumeInfo.title?.let { Editable.Factory.getInstance().newEditable(it) }
+        authorsEditText?.text = item.volumeInfo.authors?.joinToString(", ")?.let { Editable.Factory.getInstance().newEditable(it) }
+        publisherEditText?.text = item.volumeInfo.publisher?.let { Editable.Factory.getInstance().newEditable(it) }
+        publishedDateEditText?.text = item.volumeInfo.publishedDate?.let { Editable.Factory.getInstance().newEditable(it) }
+        pagesEditText?.text = item.volumeInfo.pageCount?.toString()?.let { Editable.Factory.getInstance().newEditable(it) }
+        descriptionEditText?.text = item.volumeInfo.description?.let { Editable.Factory.getInstance().newEditable(it) }
+        thumbnailEditText?.text = item.volumeInfo.imageLinks?.thumbnail?.let { Editable.Factory.getInstance().newEditable(it) }
+        categoriesEditText?.text = item.volumeInfo.categories?.joinToString(", ")?.let { Editable.Factory.getInstance().newEditable(it) }
+        infoURLEditText?.text = item.volumeInfo.infoLink?.let { Editable.Factory.getInstance().newEditable(it) }
+
+        val industryIdentifiers = item.volumeInfo.industryIdentifiers
+        val isbn13 = industryIdentifiers.find { it.type == "ISBN_13" }?.identifier ?: ""
+        iSBNEditText?.text = Editable.Factory.getInstance().newEditable(isbn13)
+
+        clearSearchResults();
     }
 }

@@ -7,6 +7,20 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+    <ImageButton
+        android:id="@+id/addNewGoogleBook"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="@string/bookmark_description"
+        android:translationZ="8dp"
+        android:src="@drawable/add"
+        android:background="@null"
+        android:scaleType="centerInside"
+        tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -66,7 +80,7 @@
 
             <TextView
                 android:id="@+id/year"
-                android:layout_width="54dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/BookReleaseYearTest"
                 android:textColor="@color/darkerGreen"

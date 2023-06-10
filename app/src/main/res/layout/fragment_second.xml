@@ -19,12 +19,14 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:paddingStart="36dp"
-            android:paddingEnd="36dp">
+            android:paddingEnd="36dp"
+            tools:ignore="InefficientWeight">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                tools:ignore="NestedWeights">
 
                 <TextView
                     android:id="@+id/textView"
@@ -90,13 +92,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:ignore="InefficientWeight,UselessParent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    tools:ignore="NestedWeights">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -146,6 +150,36 @@
                         android:inputType="textPersonName"
                         android:text=""
                         tools:ignore="LabelFor,SpeakableTextPresentCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck,VisualLintTextFieldSize" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Categories:"
+                        android:textColor="@color/darkerGreen"
+                        tools:ignore="HardcodedText,NestedWeights" />
+
+                    <EditText
+                        android:id="@+id/BookCategoriesEdit"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:autofillHints=""
+                        android:background="@drawable/edittext_rounded_background_line"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:text=""
+                        android:textColorHighlight="@color/darkGreen"
+                        android:textColorLink="@color/darkGreen"
+                        tools:ignore="LabelFor,SpeakableTextPresentCheck,SpeakableTextPresentCheck,TextFields,TouchTargetSizeCheck,VisualLintTextFieldSize" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -245,7 +279,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="ISBN:"
+                        android:text="ISBN 13:"
                         android:textColor="@color/darkerGreen"
                         tools:ignore="HardcodedText,NestedWeights" />
 
@@ -320,6 +354,34 @@
                         android:inputType="textPersonName"
                         android:text=""
                         tools:ignore="LabelFor,SpeakableTextPresentCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck,VisualLintTextFieldSize" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Info URL:"
+                        android:textColor="@color/darkerGreen"
+                        tools:ignore="HardcodedText,NestedWeights" />
+
+                    <EditText
+                        android:id="@+id/BookInfoURLEdit"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:autofillHints=""
+                        android:background="@drawable/edittext_rounded_background_line"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:text=""
+                        tools:ignore="LabelFor,SpeakableTextPresentCheck,SpeakableTextPresentCheck,TextFields,TouchTargetSizeCheck,VisualLintTextFieldSize" />
                 </LinearLayout>
 
                 <Button

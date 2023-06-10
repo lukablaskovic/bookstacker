@@ -15,9 +15,8 @@ import com.example.bookstacker.database.BookEntity
 import com.example.bookstacker.databinding.FragmentFirstBinding
 import com.example.bookstacker.model.Book
 import com.example.bookstacker.model.ImageLinks
+import com.example.bookstacker.model.IndustryIdentifier
 import com.example.bookstacker.model.VolumeInfo
-import com.example.bookstacker.placeholder.PlaceholderContent
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -93,7 +92,10 @@ class FirstFragment : Fragment() {
         return bookEntityList.map { bookEntity ->
             Book(
                 id = bookEntity.id.toString(),
-                volumeInfo = VolumeInfo( bookEntity.title,  listOf(bookEntity.authors),  bookEntity.publisher,  bookEntity.publishedDate,  bookEntity.description, ImageLinks("",bookEntity.thumbnail), bookEntity.pageCount)
+                volumeInfo = VolumeInfo( bookEntity.title,  listOf(bookEntity.authors),
+                    bookEntity.publisher,  bookEntity.publishedDate,  bookEntity.description,
+                    ImageLinks("",bookEntity.thumbnail), listOf(IndustryIdentifier("ISBN_13", bookEntity.ISBN)),
+                    bookEntity.pageCount, bookEntity.mainCategory, listOf(bookEntity.categories), bookEntity.infoLink)
             )
         }
     }

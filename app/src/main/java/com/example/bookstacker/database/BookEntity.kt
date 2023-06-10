@@ -14,5 +14,9 @@ data class BookEntity(
     val pageRead: Int = 0,
     val status: String = "UNREAD",
     val pageCount: Int,
-    val thumbnail: String
+    val thumbnail: String,
+    val ISBN: String,
+    val mainCategory: String,
+    val categories: String,
+    val infoLink: String
 )
