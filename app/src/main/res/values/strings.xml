@@ -43,4 +43,12 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="image_logo">TODO</string>
+    <string name="image_logo_description">TODO</string>
+    <string name="BookNameTest">Lunar Storm</string>
+    <string name="BookAuthorTest">Terry Scrosby</string>
+    <string name="BookReleaseYearTest">2012.</string>
+    <string name="BookPagesTest">Pages: 254</string>
+    <string name="bookmark_description">bookmark_description</string>
+    <string name="ListFragment">ListFragment</string>
 </resources>
