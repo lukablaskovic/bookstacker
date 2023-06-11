@@ -20,7 +20,7 @@ Simply install the application on your Android device, and you're all set to sta
 [Juraj Dobrila University of Pula](http://www.unipu.hr/)  
 [Pula Faculty of Informatics](https://fipu.unipu.hr/)  
 Course: **Mobile Applications**, Academic Year 2022./2023.  
-Mentor: **Siniša Sovilj** (https://fipu.unipu.hr/fipu/sinisa.sovilj, sinisa.sovilj@unipu.hr)
+Mentor: **prof. Siniša Sovilj** (https://fipu.unipu.hr/fipu/sinisa.sovilj, sinisa.sovilj@unipu.hr)
 
 ### License
 BookStacker is released under the MIT License.
