@@ -11,8 +11,9 @@ Bookstacker is an Android application that enables users to store their favourit
 ## Usage
 Simply install the application on your Android device, and you're all set to start stacking books in your digital library. Search for books using the search feature or manually add them, then simply change the reading status as you progress.
 
-## License
-BookStacker is released under the MIT License.
+### Authors and assignments
+- Alesandro Žužić (azuzic@unipu.hr)  
+- Luka Blašković (lblaskovi@unipu.hr)
 
 ### Organization
 
@@ -20,6 +21,9 @@ BookStacker is released under the MIT License.
 [Pula Faculty of Informatics](https://fipu.unipu.hr/)  
 Course: **Mobile Applications**, Academic Year 2022./2023.  
 Mentor: **Siniša Sovilj** (https://fipu.unipu.hr/fipu/sinisa.sovilj, sinisa.sovilj@unipu.hr)
+
+### License
+BookStacker is released under the MIT License.
 
 ### Screenshots
 
