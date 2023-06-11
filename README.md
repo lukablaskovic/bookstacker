@@ -32,4 +32,6 @@ BookStacker is released under the MIT License.
   <img src="/screenshots/Bookstacker2.png?raw=true" width="256" /> 
   <img src="/screenshots/Bookstacker3.png?raw=true" width="256" />
   <img src="/screenshots/Bookstacker4.png?raw=true" width="256" />
+  <img src="/screenshots/Bookstacker5.png?raw=true" width="256" />
+  <img src="/screenshots/Bookstacker6.png?raw=true" width="256" />
 </p>
