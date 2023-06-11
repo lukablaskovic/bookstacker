@@ -69,6 +69,12 @@ class SecondFragment : Fragment(), MyItemGoogleBookRecyclerViewAdapter.OnAddButt
         val addNewBookButton: Button = view.findViewById(R.id.addNewBookButton)
 
         addNewBookButton.setOnClickListener {
+
+            val backButton = requireActivity().findViewById<View>(R.id.back)
+            val logo = requireActivity().findViewById<View>(R.id.logo)
+            logo.visibility = View.VISIBLE
+            backButton.visibility = View.GONE
+
             val titleEditText: EditText = view.findViewById(R.id.BookTitleEdit)
             val authorsEditText: EditText = view.findViewById(R.id.BookAuthorEdit)
             val publisherEditText: EditText = view.findViewById(R.id.BookPublisherEdit)
@@ -233,8 +239,8 @@ class SecondFragment : Fragment(), MyItemGoogleBookRecyclerViewAdapter.OnAddButt
         categoriesEditText?.text = item.volumeInfo.categories?.joinToString(", ")?.let { Editable.Factory.getInstance().newEditable(it) }
         infoURLEditText?.text = item.volumeInfo.infoLink?.let { Editable.Factory.getInstance().newEditable(it) }
 
-        val industryIdentifiers = item.volumeInfo.industryIdentifiers
-        val isbn13 = industryIdentifiers.find { it.type == "ISBN_13" }?.identifier ?: ""
+        val industryIdentifiers = item.volumeInfo?.industryIdentifiers
+        val isbn13 = industryIdentifiers?.find { it.type == "ISBN_13" }?.identifier ?: ""
         iSBNEditText?.text = Editable.Factory.getInstance().newEditable(isbn13)
 
         clearSearchResults();

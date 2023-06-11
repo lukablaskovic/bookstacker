@@ -44,7 +44,6 @@ class FirstFragment : Fragment(), MyListOfAddedBooksRecyclerViewAdapter.OnAddBut
     // onDestroyView.
     private val binding get() = _binding!!
     private lateinit var adapter: MyListOfAddedBooksRecyclerViewAdapter
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -77,13 +76,17 @@ class FirstFragment : Fragment(), MyListOfAddedBooksRecyclerViewAdapter.OnAddBut
             // Get a reference to the RecyclerView
             val recyclerView: RecyclerView = view.findViewById(R.id.list)
             adapter = MyListOfAddedBooksRecyclerViewAdapter(storedBooks.toMutableList())        // Set the adapter on the RecyclerView
-            recyclerView.adapter = adapter
-            adapter.onAddButtonClickListener = this@FirstFragment
 
-            books.addAll(convertBookEntityListToBookCollection(storedBooks));
-            val totalBooksTextView: TextView = view.findViewById(R.id.totalBooks)
-            val totalBooks = books.size
-            totalBooksTextView.text = "$totalBooks"
+            activity?.runOnUiThread {
+                recyclerView.adapter = adapter
+                adapter.onAddButtonClickListener = this@FirstFragment
+                books.addAll(convertBookEntityListToBookCollection(storedBooks));
+                val totalBooksTextView: TextView = view.findViewById(R.id.totalBooks)
+                val totalBooks = books.size
+                totalBooksTextView.text = "$totalBooks"
+            }
+
+
 
             // Print them out (on the main thread to avoid NetworkOnMainThreadException)
             withContext(Dispatchers.Main) {
@@ -465,6 +468,9 @@ class FirstFragment : Fragment(), MyListOfAddedBooksRecyclerViewAdapter.OnAddBut
             withContext(Dispatchers.Main) {
                 adapter.setItems(storedBooks.toMutableList())
             }
+            val totalBooksTextView: TextView? = view?.findViewById(R.id.totalBooks)
+            val totalBooks = storedBooks.size
+            totalBooksTextView?.text = "$totalBooks"
         }
     }
 }
