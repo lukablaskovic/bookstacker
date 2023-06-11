@@ -1,5 +1,5 @@
 # Bookstacker - Your Personal Book Organizer
-BookStacker is an Android application that enables users to store their favourite books in a personal, easy-to-manage digital library. The app is designed to assist book lovers in tracking their reading journey, providing a platform to add, store, and update the status of their books in a more structured and efficient way.
+Bookstacker is an Android application that enables users to store their favourite books in a personal, easy-to-manage digital library. The app is designed to assist book lovers in tracking their reading journey, providing a platform to add, store, and update the status of their books in a more structured and efficient way.
 
 ## Key Features
 - Add New Book Manually: You can manually input the details of any book you wish to add to your collection. This feature is perfect for those books you may own that are not available in online databases.
