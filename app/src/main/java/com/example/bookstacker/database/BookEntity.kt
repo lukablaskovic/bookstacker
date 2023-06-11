@@ -6,19 +6,19 @@ import androidx.room.PrimaryKey
 @Entity
 data class BookEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
-    val title: String,
-    val authors: String,
-    val publisher: String,
-    val publishedDate: String,
-    val description: String,
-    val pageRead: Int = 0,
-    val status: String = "UNREAD",
-    val pageCount: Int,
-    val thumbnail: String,
-    val ISBN: String,
-    val mainCategory: String,
-    val categories: String,
-    val infoLink: String,
+    var title: String,
+    var authors: String,
+    var publisher: String,
+    var publishedDate: String,
+    var description: String,
+    var pageRead: Int = 0,
+    var status: String = "UNREAD",
+    var pageCount: Int,
+    var thumbnail: String,
+    var ISBN: String,
+    var mainCategory: String,
+    var categories: String,
+    var infoLink: String,
 ) {
     companion object {
         // Sort by title

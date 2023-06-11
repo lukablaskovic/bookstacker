@@ -25,9 +25,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
 class SecondFragment : Fragment(), MyItemGoogleBookRecyclerViewAdapter.OnAddButtonClickListener {
 
     private lateinit var db: BookDatabase
@@ -53,6 +50,14 @@ class SecondFragment : Fragment(), MyItemGoogleBookRecyclerViewAdapter.OnAddButt
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
+
+        val backButton = requireActivity().findViewById<View>(R.id.back)
+        val logo = requireActivity().findViewById<View>(R.id.logo)
+        backButton.setOnClickListener {
+            backButton.visibility = View.GONE
+            logo.visibility = View.VISIBLE
+            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+        }
 
         db = Room.databaseBuilder(
             requireContext(),
@@ -182,11 +187,13 @@ class SecondFragment : Fragment(), MyItemGoogleBookRecyclerViewAdapter.OnAddButt
                 if (response.isSuccessful) {
                     books.clear()
                     response.body()?.let { bookResponse ->
-                        books.addAll(bookResponse.items) // Add the fetched books to your list
+                        bookResponse.items?.let { fetchedBooks ->
+                            books.addAll(fetchedBooks) // Add the fetched books to your list
 
-                        // Print each book's title, description and image links
-                        for (book in books) {
-                            println(book)
+                            // Print each book's title, description, and image links
+                            for (book in books) {
+                                println(book)
+                            }
                         }
                     }
                     // Create an instance of the adapter

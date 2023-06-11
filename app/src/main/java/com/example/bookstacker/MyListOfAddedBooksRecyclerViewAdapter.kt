@@ -9,12 +9,16 @@ import android.widget.ImageView
 import android.widget.TextView
 import coil.load
 import com.example.bookstacker.database.BookEntity
-
 import com.example.bookstacker.databinding.FragmentListOfAddedBooksBinding
 
 class MyListOfAddedBooksRecyclerViewAdapter(
-    private val values: MutableList<BookEntity>
+    private val values: MutableList<BookEntity>,
 ) : RecyclerView.Adapter<MyListOfAddedBooksRecyclerViewAdapter.ViewHolder>() {
+
+    interface OnAddButtonClickListener {
+        fun onAddButtonClicked(item: BookEntity)
+    }
+    var onAddButtonClickListener: OnAddButtonClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -53,6 +57,11 @@ class MyListOfAddedBooksRecyclerViewAdapter(
                 val imageUrl = item.thumbnail
                 holder.bookCoverView.load(imageUrl)
             }
+            else {
+                holder.bookCoverView.load("https://www.forewordreviews.com/books/covers/not-for-profit.jpg")
+            }
+        } else {
+            holder.bookCoverView.load("https://www.forewordreviews.com/books/covers/not-for-profit.jpg")
         }
         when (item.status) {
             "READING" -> {
@@ -76,6 +85,10 @@ class MyListOfAddedBooksRecyclerViewAdapter(
                 holder.green.visibility = INVISIBLE
             }
         }
+
+        holder.itemView.setOnClickListener {
+            onAddButtonClickListener?.onAddButtonClicked(item)
+        }
     }
 
     override fun getItemCount(): Int = values.size
@@ -96,4 +109,9 @@ class MyListOfAddedBooksRecyclerViewAdapter(
         }
     }
 
+    fun setItems(items: List<BookEntity>) {
+        values.clear()
+        values.addAll(items)
+        notifyDataSetChanged()
+    }
 }

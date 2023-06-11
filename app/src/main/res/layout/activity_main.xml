@@ -32,17 +32,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <com.google.android.material.appbar.MaterialToolbar
-                        android:id="@+id/toolbar"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-                        app:layout_constraintEnd_toEndOf="parent"
+                    <ImageButton
+                        android:id="@+id/back"
+                        android:layout_width="128dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:visibility="gone"
+                        android:layout_marginBottom="24dp"
+                        android:background="#00FFFFFF"
+                        android:scaleType="fitCenter"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/back"
+                        tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
 
                     <ImageView
-                        android:id="@+id/imageView"
+                        android:id="@+id/logo"
+                        android:visibility="visible"
                         android:layout_width="wrap_content"
                         android:layout_height="63dp"
                         android:background="#63918A"
@@ -52,6 +60,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@drawable/logo"
                         tools:ignore="ImageContrastCheck" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.appbar.AppBarLayout>

@@ -10,4 +10,7 @@
     <style name="MyButton" parent="Widget.MaterialComponents.Button">
         <item name="backgroundTint">@color/darkGreen</item>
     </style>
+    <style name="MyButton2" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">#E91E63</item>
+    </style>
 </resources>
