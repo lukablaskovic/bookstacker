@@ -4,7 +4,7 @@ Bookstacker is an Android application that enables users to store their favourit
 ## Key Features
 - Add New Book Manually: You can manually input the details of any book you wish to add to your collection. This feature is perfect for those books you may own that are not available in online databases.
 
-- Search and Store Books: Powered by the Google Books API, our app provides a vast variety of books to search from. You can easily search for any book and add it to your collection.
+- Search and Store Books: Powered by the [Google Books API](https://developers.google.com/books), our app provides a vast variety of books to search from. You can easily search for any book and add it to your collection.
 
 - Change Reading Status: With Bookstacker, tracking your reading progress is as simple as a tap. You can update the status of each book as "Unread", "Reading", or "Read" as you progress through your reading journey.
 
