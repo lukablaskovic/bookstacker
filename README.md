@@ -20,3 +20,12 @@ BookStacker is released under the MIT License.
 [Pula Faculty of Informatics](https://fipu.unipu.hr/)  
 Course: **Mobile Applications**, Academic Year 2022./2023.  
 Mentor: **Siniša Sovilj** (https://fipu.unipu.hr/fipu/sinisa.sovilj, sinisa.sovilj@unipu.hr)
+
+### Screenshots
+
+<p float="left">
+  <img src="/screenshots/bookstacker1.png?raw=true" width="256" />
+  <img src="/screenshots/Bookstacker2.png?raw=true" width="256" /> 
+  <img src="/screenshots/Bookstacker3.png?raw=true" width="256" />
+  <img src="/screenshots/Bookstacker4.png?raw=true" width="256" />
+</p>
